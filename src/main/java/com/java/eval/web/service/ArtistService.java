@@ -1,4 +1,4 @@
-package com.java.eval.web.gestion;
+package com.java.eval.web.service;
 
 import com.java.eval.web.model.Album;
 import com.java.eval.web.model.Artist;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ArtistGestion {
+public class ArtistService {
 
     @Autowired
     private ArtistRepository artistRepository;

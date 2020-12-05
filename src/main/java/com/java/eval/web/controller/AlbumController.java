@@ -1,7 +1,7 @@
 package com.java.eval.web.controller;
 
 import com.java.eval.web.model.Album;
-import com.java.eval.web.gestion.AlbumGestion;
+import com.java.eval.web.service.AlbumService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.*;
 public class AlbumController {
 
     @Autowired
-    private AlbumGestion albumGestion;
+    private AlbumService albumService;
 
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Album addAlbum(@RequestBody Album album){
-        album = albumGestion.addAlbum(album);
+        album = albumService.addAlbum(album);
         return album;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAlbum(@PathVariable Long id) { albumGestion.deleteAlbum(id); }
+    public void deleteAlbum(@PathVariable Long id) { albumService.deleteAlbum(id); }
 
 }

@@ -1,7 +1,7 @@
 
 package com.java.eval.web.controller;
 
-import com.java.eval.web.gestion.ArtistGestion;
+import com.java.eval.web.service.ArtistService;
 import com.java.eval.web.model.Artist;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +18,17 @@ import java.util.List;
 public class ArtistController {
 
     @Autowired
-    private ArtistGestion artistGestion;
+    private ArtistService artistService;
 
     @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Artist findById(@PathVariable(value = "id") Long id) {
-        return artistGestion.findById(id);
+        return artistService.findById(id);
     }
 
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, params = "name")
     public List<Artist> findByName(@RequestParam("name") String name) {
-        return artistGestion.findByNameLike(name);
+        return artistService.findByNameLike(name);
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,24 +36,24 @@ public class ArtistController {
                                    @RequestParam("") Integer size,
                                    @RequestParam("") String sortProperty,
                                    @RequestParam("") String sortDirection) {
-        return artistGestion.listArtists(page, size, sortProperty, sortDirection);
+        return artistService.listArtists(page, size, sortProperty, sortDirection);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Artist addArtist(@RequestBody Artist artist) {
-        return artistGestion.addArtist(artist);
+        return artistService.addArtist(artist);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Artist updateArtist(@PathVariable Long id, @RequestBody Artist artist) {
-        return artistGestion.updateArtist(artist);
+        return artistService.updateArtist(artist);
     }
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteArtist(@PathVariable Long id){
-        artistGestion.deleteArtist(id);
+        artistService.deleteArtist(id);
     }
 }
 
